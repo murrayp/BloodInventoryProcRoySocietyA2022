@@ -256,8 +256,9 @@ data_min_outliers(outliers,:)=[];
 data_outliers=data(outliers,:);
 
 z=data_min_outliers(:,1)-data_min_outliers(:,2);
+tbl = table(z);
 mdl = fitlm(zeros(size(z)), z);   % intercept-only model
-
+mdl = fitlm(tbl, 'z ~ 1');
 
 y_hat = data_min_outliers(:,1) + mdl.Coefficients.Estimate(1);
 y=data_min_outliers(:,1) ;
