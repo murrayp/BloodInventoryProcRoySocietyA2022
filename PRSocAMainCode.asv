@@ -227,8 +227,8 @@ for i=1:length(k_2_all)
 end
 
 
-% Gather together measurements and model predicts in single 2D array
 data=[expected_mean_age_transfused_units_all'  mean_age_transfused_units_all' ];
+
 
 % annotation
 period={'1','1','1','1','1','1','1','1','2','2','2','2','2','2','2','2','3','3','3','3','3','3','3','3'};
@@ -244,7 +244,8 @@ period=period(notnanind);
 group=group(notnanind);
 
 
-% Deviation between model and observation
+
+
 z_all=data(:,1)-data(:,2);
 
 
@@ -272,8 +273,7 @@ hold on;
 plot(Z_score)
 vec=[1 size(Z_score,1)];
 plot(vec,-2*ones(size(vec)),vec,2*ones(size(vec)))
-xlabel('Data index')
-ylabel('Z score')
+xlab
 
 %% PLot non-outlier datapoints
 figure; 
@@ -289,13 +289,14 @@ text(12,32,['$R^2$ = ' num2str(R2) ',   y=' num2str(mdl.Coefficients.Estimate(1)
 colorLevels  = unique(period);
 markerLevels = bloodtypesstr;
 
-% Plot regression line
+
 x_plt=[0 35];
 y_plt=-mdl.Coefficients.Estimate(1)+x_plt;
 plot(x_plt,y_plt,':','LineWidth',1)
 
 
-% Scatter plot each blood groups
+
+
 
 colorMap = lines(numel(colorLevels));
 markers  = {'o','s','^','d','v','>','p','h'};
@@ -305,6 +306,7 @@ y=data(:,2);
 for i = 1:numel(colorLevels)
     for j = 1:numel(markerLevels)
         idx = (strcmp(period,colorLevels{i}) & strcmp(group,markerLevels{j}));
+
         scatter(ax1,x(idx), y(idx),60,colorMap(i,:),markers{j},'filled');
     end
 end
@@ -316,10 +318,9 @@ plot(data_outliers(:,1),data_outliers(:,2),'o','MarkerSize', 14, ...
     'MarkerEdgeColor', 'r', ...
     'LineStyle', 'none')
 
+
 ylabel('${a}_{exp}$ (Data)')
 xlabel('$a_{exp}$ (Model)')
-
-%%  Add legend
 
 axColor = axes('Position',ax1.Position,'Visible','off');
 hold(axColor,'on')
